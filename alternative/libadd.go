@@ -7,7 +7,6 @@ import "C"
 import "net/http"
 import "fmt"
 import "sync"
-import "strings"
 
 
 //export add
@@ -19,13 +18,13 @@ func add(left, right int) int {
 
 
 //export goroutine
-func goroutine(url string, lenth int) int {
+func goroutine(url string, length int) int {
 	var wg sync.WaitGroup
 
 	wg.Add(1)
 	go func() {
-		fmt.Println(url)
-		url = strings.Trim(url, "%00%00%00")
+		fmt.Println(len(url))
+		fmt.Println(length)
 		fmt.Println(url)
 		resp, err := http.Get(url)
 		fmt.Println(resp)
@@ -33,6 +32,15 @@ func goroutine(url string, lenth int) int {
 		defer wg.Done()
 	}()
 	wg.Wait()
+	return 0
+}
+
+//export python_getter
+func python_getter(url string, length int) int {
+	fmt.Println(url)
+	resp, err := http.Get(url)
+	fmt.Println(resp)
+	fmt.Println(err)
 	return 0
 }
 
