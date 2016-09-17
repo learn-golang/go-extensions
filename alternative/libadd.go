@@ -23,9 +23,6 @@ func goroutine(url string, length int) int {
 
 	wg.Add(1)
 	go func() {
-		fmt.Println(len(url))
-		fmt.Println(length)
-		fmt.Println(url)
 		resp, err := http.Get(url)
 		fmt.Println(resp)
 		fmt.Println(err)
@@ -43,6 +40,22 @@ func python_getter(url string, length int) int {
 	fmt.Println(err)
 	return 0
 }
+
+
+//export complex_return
+func complex_return(url string, length int) (string, string, string) {
+	return "not-ok", "2", "2"
+}
+
+
+//export multiple_strings_parameters
+func multiple_strings_parameters(url_one string, url_two string, someint int) int {
+	fmt.Println(url_one)
+	fmt.Println(url_two)
+	fmt.Println(someint)
+	return 0
+}
+
 
 func main() {
 }
